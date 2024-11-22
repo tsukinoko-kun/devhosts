@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
+---
+builds:
+  - binary: devhosts
+    goos:
+      - darwin
+      - linux
+    goarch:
+      - amd64
+      - arm64
+    env:
+      - CGO_ENABLED=0
+
+checksum:
+  name_template: "checksums.txt"
+  algorithm: sha256
+
+release:
+  prerelease: auto
+
+universal_binaries:
+  - replace: false
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+brews:
+  - name: devhosts
+    homepage: https://github.com/tsukinoko-kun/devhosts
+    description: Hosts file manager for development environments
+    repository:
+      owner: tsukinoko-kun
+      name: homebrew-tap
+    commit_author:
+      name: tsukinoko-kun
+      email: gh@frankmayer.dev
